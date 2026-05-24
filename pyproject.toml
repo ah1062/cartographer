@@ -1,0 +1,85 @@
+[project]
+name = "cartographer"
+authors = [
+    {name = "aahoughton"}
+]
+version = "0.1.0"
+description = "Diplomacy Engine"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "numpy",
+    "scipy",
+    "shapely",
+    "matplotlib",
+]
+
+[project.scripts]
+main = "cartographer.main:cli"
+
+[dependency-groups]
+dev = [
+    "pydeps>=3.0.6",
+    "pytest",
+    "ruff",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# --------------------------------
+# Ruff
+# --------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# --------------------------------
+# Pytest
+# --------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# --------------------------------
+# Pydeps
+# --------------------------------
+[tool.pydeps]
+# Only include your internal package
+only = "cartographer"
+
+# Ignore third-party / external libs
+exclude = [
+    "numpy.*",
+    "scipy.*",
+    "shapely.*",
+    "networkx.*",
+    "matplotlib.*",
+    "PIL.*",
+]
+
+# Cleaner graph output
+no_show = true
+rankdir = "LR"
