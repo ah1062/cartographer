@@ -1,0 +1,71 @@
+[world]
+width = 10000
+height = 10000
+point_count = 10000
+seed = 67
+
+
+[voronoi]
+relaxation_iterations = 2
+
+
+[sea]
+sea_ratio = 0.35
+deepsea_minimum_size = 5
+
+
+[erosion]
+enabled = true
+
+# number of erosion passes
+iterations = 1
+
+# coastline decay softness
+# higher => larger stable continents
+falloff = 25
+
+# overall coastal erosion multiplier
+erosion_strength = 0.50
+
+# guaranteed preserved inland core
+preserve_core_distance = 8
+
+
+[lakes]
+enabled = true
+
+# poisson lambda for number of lakes
+poisson_mean = 12
+
+# poisson lambda for lake sizes
+average_size = 6
+
+# maximum BFS-grown lake size
+max_size = 30
+
+# graph distance from sea required
+min_inland_distance = 4
+
+[supply_centers]
+ratio = 0.03
+min_distance = 3
+centrality_weight = 1.0
+spacing_weight = 0.7
+
+[cleanup]
+enabled = true
+
+# minimum polygon area as fraction of world area
+min_area_fraction = 0.00001
+
+
+[renderer]
+background = [255, 255, 255]
+
+edge_colour = [0, 0, 0]
+
+edge_width = 1
+
+border_size = 30
+
+border_colour = [105, 70, 30]

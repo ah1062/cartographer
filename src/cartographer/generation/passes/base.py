@@ -13,5 +13,4 @@ class GenerationPass(Protocol):
         world: World,
         config,
         rng: np.random.Generator,
-    ) -> None:
-        ...
+    ) -> None: ...

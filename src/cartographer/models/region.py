@@ -20,3 +20,17 @@ class Region:
     supply_center: bool = False
 
     metadata: dict = field(default_factory=dict)
+
+    @property
+    def colour(self) -> str:
+        region_colour = "pink"
+
+        match self.region_type:
+            case RegionType.LAND:
+                region_colour = "lavender"
+            case RegionType.SEA:
+                region_colour = "lightsteelblue"
+            case RegionType.DEEPSEA:
+                region_colour = "steelblue"
+
+        return region_colour
