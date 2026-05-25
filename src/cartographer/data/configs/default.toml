@@ -2,7 +2,7 @@
 width = 10000
 height = 10000
 point_count = 10000
-seed = 67
+seed = 42
 
 
 [voronoi]

@@ -16,9 +16,8 @@ def main():
             "elevation",
             "sea",
             "erosion",
-            "erosion",
-            "erosion",
             "lakes",
+            "rivers",
             "deepsea",
             "prune",
             "supply_center",
@@ -28,7 +27,7 @@ def main():
     renderer = WorldRenderer(
         cfg.world.width,
         cfg.world.height,
-        passes=["regions", "continents", "lakes", "supply_center"],
+        passes=["regions", "continents", "lakes", "supply_center", "titles"],
     )
 
     world = generator.generate()

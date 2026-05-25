@@ -37,10 +37,10 @@ class ElevationPass:
 
         values = sorted(elevation.values())
 
-        deepsea_ratio = 0.15
+        deepsea_ratio = 0.20
         deepsea_cutoff = values[int(len(values) * deepsea_ratio)]
 
-        sea_ratio = 0.35
+        sea_ratio = 0.42
         sea_cutoff = values[int(len(values) * sea_ratio)]
 
         for node, value in elevation.items():
@@ -52,15 +52,14 @@ class ElevationPass:
                 region_type = RegionType.LAND
 
             world.regions[node].region_type = region_type
+            world.regions[node].elevation = value
             world.graph.nodes[node]["region_type"] = region_type
+            world.graph.nodes[node]["elevation"] = value
 
     def _generate_elevation(
         self,
         world,
         config,
-        *,
-        scale: float = 5.0,
-        octaves: int = 6,
     ):
         elevation = {}
 
@@ -70,18 +69,18 @@ class ElevationPass:
             region = regions[node]
             centroid = region.geometry.centroid
 
-            x = centroid.x / config.world.width
-            y = centroid.y / config.world.height
+            x = centroid.x
+            y = centroid.y
 
             value = pnoise2(
-                x * scale,
-                y * scale,
-                octaves=octaves,
+                x,
+                y,
+                octaves=self.octaves,
                 persistence=0.5,
                 lacunarity=2.0,
                 repeatx=999999,
                 repeaty=999999,
-                base=self.seed,
+                base=config.world.seed,
             )
 
             elevation[node] = value

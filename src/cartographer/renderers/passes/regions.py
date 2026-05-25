@@ -12,7 +12,7 @@ class RegionPass:
             if region.geometry is None:
                 continue
 
-            self._draw_geom(draw, region.geometry, region.colour)
+            self._draw_geom(draw, region.geometry, region.get_colour())
 
     def _draw_geom(self, draw, geom, fill_colour):
         if isinstance(geom, Polygon):

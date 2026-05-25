@@ -1,7 +1,8 @@
 class SupplyCenterRenderPass:
     name = "supply_centers"
 
-    def __init__(self, *, radius: int = 6, fill=(255, 0, 0), outline=(0, 0, 0)):
+    def __init__(self, renderer, *, radius: int = 6, fill=(255, 0, 0), outline=(0, 0, 0)):
+        self.r = renderer
         self.radius = radius
         self.fill = fill
         self.outline = outline

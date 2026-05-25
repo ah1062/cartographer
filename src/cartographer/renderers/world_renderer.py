@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import logging
+import time
 
 from PIL import Image, ImageDraw, ImageOps
 
 from cartographer.models import World
 from cartographer.renderers.passes.factory import RenderPassFactory
+from cartographer.utils.timing import func_timer
 
 logger = logging.getLogger(__name__)
 
@@ -36,12 +38,16 @@ class WorldRenderer:
     # RENDER
     # ---------------------------------------------------------
 
+    @func_timer
     def render(self, world: World) -> Image.Image:
         image = Image.new("RGB", (self.width, self.height), self.background)
         draw = ImageDraw.Draw(image)
 
         for p in self._passes:
             stager = RenderPassFactory.create(p, renderer=self)
+            start = time.perf_counter()
             stager.render(draw, world)
+            
+            logger.info(f"Render stage {p} took {time.perf_counter() - start:.3f}")
 
         return ImageOps.expand(image, border=30, fill=(105, 70, 30))
